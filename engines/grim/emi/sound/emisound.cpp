@@ -282,9 +282,7 @@ bool EMISound::getSoundStatus(const Common::String &soundName) {
 void EMISound::stopSound(const Common::String &soundName) {
 	Common::StackLock lock(_mutex);
 	TrackList::iterator it = getPlayingTrackByName(soundName);
-	if (it == _playingTracks.end()) {
-		warning("Sound track '%s' could not be found to stop", soundName.c_str());
-	} else {
+	if (it != _playingTracks.end()) {
 		delete (*it);
 		_playingTracks.erase(it);
 	}
